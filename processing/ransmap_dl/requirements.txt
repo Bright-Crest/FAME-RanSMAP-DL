@@ -1,0 +1,4 @@
+numpy
+pandas
+torch -i https://download.pytorch.org/whl/cpu
+tqdm
