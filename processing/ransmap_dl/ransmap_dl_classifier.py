@@ -22,10 +22,15 @@ import tempfile
 from pathlib import Path
 from typing import List, Dict, Tuple, Optional
 
-import numpy as np
-import torch
-import torch.nn as nn
+try:
+    import numpy as np
+    import torch
+    import torch.nn as nn
+    HAVE_NUMPY_AND_TORCH = True
+except ImportError:
+    HAVE_NUMPY_AND_TORCH = False
 
+from fame.common.exceptions import ModuleInitializationError
 from fame.core.module import ProcessingModule  # FAME 提供
 
 CURRENT_DIR = Path(__file__).parent
@@ -129,6 +134,9 @@ class RansmapDLClassifier(ProcessingModule):
 
     def initialize(self):
         """模块初始化：依赖检查、导入数据处理函数、加载权重/标准化。"""
+        if not HAVE_NUMPY_AND_TORCH:
+            raise ModuleInitializationError(self, "Missing dependency")
+
         # 可选：把你的数据模块所在目录加入 sys.path（方便在 FAME worker 容器内定位）
         code_root = (self.get_setting("code_root") or "").strip()
         if code_root:
