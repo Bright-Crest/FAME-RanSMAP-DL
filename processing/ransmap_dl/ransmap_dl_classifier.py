@@ -120,7 +120,7 @@ class RansmapDLClassifier(ProcessingModule):
     config = [
         {"name": "model_path",   "type": "str", "default": str(CURRENT_DIR/"ckpt_best.pt"), "description": "训练得到的 ckpt_best.pt 路径"},
         {"name": "scaler_path",  "type": "str", "default": str(CURRENT_DIR/"scaler.npz"), "description": "标准化参数 scaler.npz 路径"},
-        {"name": "code_root",    "type": "str", "default": str(CURRENT_DIR), "description": "可选：ransom_data_module.py 所在目录（为空则按系统路径导入）"},
+        {"name": "code_root",    "type": "str", "default": str(CURRENT_DIR/"ransmap_dl_utils"), "description": "可选：ransom_data_module.py 所在目录（为空则按系统路径导入）"},
         {"name": "window_ms",    "type": "integer", "default": 100, "description": "窗口宽度（毫秒），需与训练一致"},
         {"name": "seq_len",      "type": "integer", "default": 256, "description": "序列长度 L"},
         {"name": "stride",       "type": "integer", "default": 256, "description": "序列步长 S（测试推荐与 L 相同）"},
